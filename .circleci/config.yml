@@ -38,8 +38,6 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - restore_cache:
-          keys: [frontend-build]
       - run:
           name: Install front-end deps
           command: |
@@ -57,8 +55,6 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - restore_cache:
-          keys: [backend-build]
       - run:
           name: Install back-end deps
           command: |
@@ -81,7 +77,7 @@ jobs:
       - run:
           name: Front-end test
           command: |
-           cd frontend &&  npm run test
+            cd frontend &&  npm run test
 
   test-backend:
     docker:
@@ -101,11 +97,11 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [frontend-build]
+          keys: [test-frontend]
       - run:
           name: Front-end test
           command: |
-           cd frontend &&  npm audit --audit-level=critical
+            cd frontend &&  npm audit --audit-level=critical
 
   scan-backend:
     docker:
@@ -113,7 +109,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [frontend-build]
+          keys: [test-backend]
       - run:
           name: Back-end test
           command: |
