@@ -48,7 +48,7 @@ jobs:
             cd frontend && npm run build
       - save_cache:
           paths: [frontend/node_modules]
-          key: frontend-build
+          key: frontend-build-new
 
   build-backend:
     docker:
@@ -73,11 +73,11 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [frontend-build]
+          keys: [frontend-build-new]
       - run:
           name: Front-end test
           command: |
-            cd frontend && npm install --save oauth-sign && npm run test
+            cd frontend && npm run test
 
   test-backend:
     docker:
@@ -97,7 +97,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [frontend-build]
+          keys: [frontend-build-new]
       - run:
           name: Front-end test
           command: |
