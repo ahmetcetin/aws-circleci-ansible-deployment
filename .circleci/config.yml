@@ -101,7 +101,7 @@ jobs:
       - run:
           name: Front-end test
           command: |
-            cd frontend &&  npm audit --audit-level=critical
+            cd frontend &&  npm audit fix --audit-level=critical --force
 
   scan-backend:
     docker:
@@ -113,7 +113,7 @@ jobs:
       - run:
           name: Back-end test
           command: |
-            cd backend && npm audit --audit-level=critical
+            cd backend && npm audit fix --audit-level=critical --force
 
   # deploy-infrastructure:
   #   docker:
