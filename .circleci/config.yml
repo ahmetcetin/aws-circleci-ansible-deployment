@@ -182,6 +182,7 @@ jobs:
           name: Install dependencies
           command: |
             apk add --update --allow-untrusted ansible
+            pip install awscli
       - run:
           name: Configure server
           no_output_timeout: 10m

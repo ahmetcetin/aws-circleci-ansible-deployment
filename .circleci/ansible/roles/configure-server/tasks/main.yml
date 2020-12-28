@@ -29,6 +29,5 @@
     production: yes
     state: present
 
-- name: Printing all the environment​ variables in Ansible
-  debug:
-  msg: "{{ ansible_env }}"
+- debug:
+    msg: "{{ ansible_env }}"
