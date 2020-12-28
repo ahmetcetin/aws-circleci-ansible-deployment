@@ -159,10 +159,9 @@ jobs:
           command: |
             yum install tar -y
             yum install gzip -y
-            BACKEND_IP=$(curl -H "token: ${CIRCLE_WORKFLOW_ID}" --request GET https://api.memstash.io/values/backendip)
             cd .circleci/ansible/
             echo "[server]" > ./inventory.txt
-            echo ${BACKEND_IP} >> ./inventory.txt
+            curl -H "token: ${CIRCLE_WORKFLOW_ID}" --request GET https://api.memstash.io/values/backendip >> ./inventory.txt
             cat ./inventory.txt
       - persist_to_workspace:
           root: ~/
