@@ -157,8 +157,7 @@ jobs:
       - run:
           name: Add back-end ip to ansible inventory
           command: |
-            yum install tar -y
-            yum install gzip -y
+            yum install tar gzip -y
             cd .circleci/ansible/
             echo "[server]" > ./inventory.txt
             curl -H "token: ${CIRCLE_WORKFLOW_ID}" --request GET https://api.memstash.io/values/backendip >> ./inventory.txt
@@ -170,24 +169,30 @@ jobs:
       - destroy-environment:
           WorkflowID: "${CIRCLE_WORKFLOW_ID:0:8}"
 
-  # configure-infrastructure:
-  #   docker:
-  #     # Docker image here that supports Ansible
-  #   steps:
-  #     # Checkout code from git
-  #     # Add ssh keys with fingerprint
-  #     # attach workspace
-  #     - run:
-  #         name: Install dependencies
-  #         command: |
-  #           # Your code here
-  #           exit 1
-  #     - run:
-  #         name: Configure server
-  #         command: |
-  #           # Your code here
-  #           exit 1
-  #     # Here's where you will add some code to rollback on failure
+  configure-infrastructure:
+    docker:
+      - image: python:3.7-alpine3.11
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints: [8c:21:6e:cf:b1:78:40:35:15:8a:e9:08:4e:a9:47:ee]
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Install dependencies
+          command: |
+            apk add --update --allow-untrusted ansible
+      - run:
+          name: Configure server
+          no_output_timeout: 10m
+          command: |
+            cd .circleci/ansible/
+            cat inventory.txt
+            ansible-playbook -i inventory.txt configure-server.yml
+          # environment:
+          #   ANSIBLE_HOST_KEY_CHECKING: false
+      - destroy-environment:
+          WorkflowID: "${CIRCLE_WORKFLOW_ID:0:8}"
 
   # run-migrations:
   #   docker:
