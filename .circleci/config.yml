@@ -131,21 +131,21 @@ jobs:
               --stack-name "udapeopleBackend-${CIRCLE_WORKFLOW_ID:0:8}" \
               --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:8}"
 
-            BACKEND_URL=$(aws ec2 describe-instances \
-              --query 'Reservations[*].Instances[*].PublicDns' \
+            BACKEND_IP=$(aws ec2 describe-instances \
+              --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --filters "Name=tag:Name,Values=udapeopleBackend-${CIRCLE_WORKFLOW_ID:0:8}" \
               --output text)
 
             echo "CircleCI Workflow ID: "
             echo ${CIRCLE_WORKFLOW_ID}
-            echo "Backend URL: "
-            echo ${BACKEND_URL}
+            echo "Backend IP: "
+            echo ${BACKEND_IP}
 
             curl -H "Content-Type: text/plain" \
                -H "token: ${CIRCLE_WORKFLOW_ID}" \
                --request PUT \
-               --data "${BACKEND_URL}" \
-               https://api.memstash.io/values/backendurl
+               --data "${BACKEND_IP}" \
+               https://api.memstash.io/values/backendip
       - run:
           name: Ensure front-end infrastructure exist
           command: |
@@ -159,10 +159,10 @@ jobs:
           command: |
             yum install tar -y
             yum install gzip -y
-            BACKEND_URL=$(curl -H "token: ${CIRCLE_WORKFLOW_ID}" --request GET https://api.memstash.io/values/backendurl)
+            BACKEND_IP=$(curl -H "token: ${CIRCLE_WORKFLOW_ID}" --request GET https://api.memstash.io/values/backendip)
             cd .circleci/ansible/
             echo "[server]" > ./inventory.txt
-            echo ${BACKEND_URL} >> ./inventory.txt
+            echo ${BACKEND_IP} >> ./inventory.txt
             cat ./inventory.txt
       - persist_to_workspace:
           root: ~/
