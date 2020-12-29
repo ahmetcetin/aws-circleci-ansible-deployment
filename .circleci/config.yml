@@ -261,7 +261,7 @@ jobs:
             sudo apt-get -y -q update
             sudo apt-get -y -q install python3 awscli
       - restore_cache:
-          keys: [frontend-build-scanned]
+          keys: [frontend-build]
       - run:
           name: Get backend url & build
           command: |
@@ -269,11 +269,11 @@ jobs:
             export API_URL="http://${BACKEND_IP}:3030"
             echo "${API_URL}"
             cd frontend
-            echo "API_URL=$API_URL" >> .env
             npm run build:prod
       - run:
           name: Deploy frontend objects
           command: |
+            cd frontend
             aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:8}/ --recursive
       - destroy-environment:
           WorkflowID: ${CIRCLE_WORKFLOW_ID:0:7}
