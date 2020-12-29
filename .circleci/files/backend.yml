@@ -32,9 +32,6 @@ Parameters:
   TYPEORMPASSWORD:
     Description: TypeORM database password
     Type: String
-  AHMET:
-    Description: test
-    Type: String
 
 Resources:
   InstanceSecurityGroup:
@@ -77,4 +74,3 @@ Resources:
           echo "TYPEORM_PORT=${TYPEORMPORT}" >> /etc/environment
           echo "TYPEORM_USERNAME=${TYPEORMUSERNAME}" >> /etc/environment
           echo "TYPEORM_PASSWORD=${TYPEORMPASSWORD}" >> /etc/environment
-          echo "AHMET=${AHMET}" >> /etc/environment
