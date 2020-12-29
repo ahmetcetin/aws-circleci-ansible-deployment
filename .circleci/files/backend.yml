@@ -5,30 +5,6 @@ Parameters:
   ID:
     Description: Unique identifier.
     Type: String
-  TYPEORMCONNECTION:
-    Description: TypeORM connection type
-    Type: String
-  TYPEORMENTITIES:
-    Description: TypeORM entities
-    Type: String
-  TYPEORMMIGRATIONS:
-    Description: TypeORM migrations
-    Type: String
-  TYPEORMMIGRATIONSDIR:
-    Description: TypeORM migrations directory
-    Type: String
-  TYPEORMHOST:
-    Description: TypeORM database host url
-    Type: String
-  TYPEORMPORT:
-    Description: TypeORM database host port
-    Type: String
-  TYPEORMUSERNAME:
-    Description: TypeORM database username
-    Type: String
-  TYPEORMPASSWORD:
-    Description: TypeORM database password
-    Type: String
 
 Resources:
   InstanceSecurityGroup:
