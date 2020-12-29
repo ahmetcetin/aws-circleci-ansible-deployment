@@ -131,20 +131,22 @@ jobs:
               --stack-name "udapeopleBackend-${CIRCLE_WORKFLOW_ID:0:8}" \
               --parameter-overrides \
                   ID="${CIRCLE_WORKFLOW_ID:0:8}" \
-                  TYPEORMCONNECTION="${TYPEORM_CONNECTION}" \
-                  TYPEORMENTITIES="${TYPEORM_ENTITIES}" \
-                  TYPEORMMIGRATIONS="${TYPEORM_MIGRATIONS}" \
-                  TYPEORMMIGRATIONSDIR="${TYPEORM_MIGRATIONS_DIR}" \
-                  TYPEORMHOST="${TYPEORM_HOST}" \
-                  TYPEORMPORT="${TYPEORM_PORT}" \
-                  TYPEORMUSERNAME="{TYPEORM_USERNAME}" \
-                  TYPEORMPASSWORD="${TYPEORM_PASSWORD}"
+                  TYPEORMCONNECTION=${TYPEORM_CONNECTION} \
+                  TYPEORMENTITIES=${TYPEORM_ENTITIES} \
+                  TYPEORMMIGRATIONS=${TYPEORM_MIGRATIONS} \
+                  TYPEORMMIGRATIONSDIR=${TYPEORM_MIGRATIONS_DIR} \
+                  TYPEORMHOST=${TYPEORM_HOST} \
+                  TYPEORMPORT=${TYPEORM_PORT} \
+                  TYPEORMUSERNAME=${TYPEORM_USERNAME} \
+                  TYPEORMPASSWORD=${TYPEORM_PASSWORD}
 
             BACKEND_IP=$(aws ec2 describe-instances \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --filters "Name=tag:Name,Values=udapeopleBackend-${CIRCLE_WORKFLOW_ID:0:8}" \
               --output text)
 
+            echo "TypeORM Host: "
+            echo ${TYPEORM_HOST}
             echo "CircleCI Workflow ID: "
             echo ${CIRCLE_WORKFLOW_ID}
             echo "Backend IP: "
