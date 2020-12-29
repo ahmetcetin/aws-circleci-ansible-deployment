@@ -5,6 +5,33 @@ Parameters:
   ID:
     Description: Unique identifier.
     Type: String
+  TYPEORMCONNECTION:
+    Description: TypeORM connection type
+    Type: String
+  TYPEORMENTITIES:
+    Description: TypeORM entities
+    Type: String
+  TYPEORMMIGRATIONS:
+    Description: TypeORM migrations
+    Type: String
+  TYPEORMMIGRATIONSDIR:
+    Description: TypeORM migrations directory
+    Type: String
+  TYPEORMHOST:
+    Description: TypeORM database host url
+    Type: String
+  TYPEORMPORT:
+    Description: TypeORM database host port
+    Type: String
+  TYPEORMUSERNAME:
+    Description: TypeORM database username
+    Type: String
+  TYPEORMPASSWORD:
+    Description: TypeORM database password
+    Type: String
+  AHMET:
+    Description: test
+    Type: String
 
 Resources:
   InstanceSecurityGroup:
@@ -35,3 +62,16 @@ Resources:
       Tags:
         - Key: Name
           Value: !Sub udapeopleBackend-${ID}
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          echo "TYPEORM_CONNECTION=${TYPEORMCONNECTION}" >> /etc/environment
+          echo "TYPEORM_DATABASE=${TYPEORMDATABASE}" >> /etc/environment
+          echo "TYPEORM_MIGRATIONS=${TYPEORMMIGRATIONS}" >> /etc/environment
+          echo "TYPEORM_MIGRATIONS_DIR=${TYPEORMMIGRATIONSDIR}" >> /etc/environment
+          echo "TYPEORM_ENTITIES=${TYPEORMENTITIES}" >> /etc/environment
+          echo "TYPEORM_HOST=${TYPEORMHOST}" >> /etc/environment
+          echo "TYPEORM_PORT=${TYPEORMPORT}" >> /etc/environment
+          echo "TYPEORM_USERNAME=${TYPEORMUSERNAME}" >> /etc/environment
+          echo "TYPEORM_PASSWORD=${TYPEORMPASSWORD}" >> /etc/environment
+          echo "AHMET=${AHMET}" >> /etc/environment
