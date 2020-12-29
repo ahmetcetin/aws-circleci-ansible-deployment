@@ -5,28 +5,28 @@ Parameters:
   ID:
     Description: Unique identifier.
     Type: String
-  TYPEORM_CONNECTION:
+  TYPEORMCONNECTION:
     Description: TypeORM connection type
     Type: String
-  TYPEORM_ENTITIES:
+  TYPEORMENTITIES:
     Description: TypeORM entities
     Type: String
-  TYPEORM_MIGRATIONS:
+  TYPEORMMIGRATIONS:
     Description: TypeORM migrations
     Type: String
-  TYPEORM_MIGRATIONS_DIR:
+  TYPEORMMIGRATIONSDIR:
     Description: TypeORM migrations directory
     Type: String
-  TYPEORM_HOST:
+  TYPEORMHOST:
     Description: TypeORM database host url
     Type: String
-  TYPEORM_PORT:
+  TYPEORMPORT:
     Description: TypeORM database host port
     Type: String
-  TYPEORM_USERNAME:
+  TYPEORMUSERNAME:
     Description: TypeORM database username
     Type: String
-  TYPEORM_PASSWORD:
+  TYPEORMPASSWORD:
     Description: TypeORM database password
     Type: String
 
@@ -62,12 +62,12 @@ Resources:
       UserData:
         Fn::Base64: |
           #!/bin/bash
-          echo "TYPEORM_CONNECTION=${TYPEORM_CONNECTION}" >> /etc/environment
-          echo "TYPEORM_DATABASE=${TYPEORM_DATABASE}" >> /etc/environment
-          echo "TYPEORM_MIGRATIONS=${TYPEORM_MIGRATIONS}" >> /etc/environment
-          echo "TYPEORM_MIGRATIONS_DIR=${TYPEORM_MIGRATIONS_DIR}" >> /etc/environment
-          echo "TYPEORM_MIGRATIONS_DIR=${TYPEORM_MIGRATIONS_DIR}" >> /etc/environment
-          echo "TYPEORM_HOST=${TYPEORM_HOST}" >> /etc/environment
-          echo "TYPEORM_PORT=${TYPEORM_PORT}" >> /etc/environment
-          echo "TYPEORM_USERNAME=${TYPEORM_USERNAME}" >> /etc/environment
-          echo "TYPEORM_PASSWORD=${TYPEORM_PASSWORD}" >> /etc/environment
+          echo "TYPEORM_CONNECTION=${TYPEORMCONNECTION}" >> /etc/environment
+          echo "TYPEORM_DATABASE=${TYPEORMDATABASE}" >> /etc/environment
+          echo "TYPEORM_MIGRATIONS=${TYPEORMMIGRATIONS}" >> /etc/environment
+          echo "TYPEORM_MIGRATIONS_DIR=${TYPEORMMIGRATIONSDIR}" >> /etc/environment
+          echo "TYPEORM_ENTITIES=${TYPEORMENTITIES}" >> /etc/environment
+          echo "TYPEORM_HOST=${TYPEORMHOST}" >> /etc/environment
+          echo "TYPEORM_PORT=${TYPEORMPORT}" >> /etc/environment
+          echo "TYPEORM_USERNAME=${TYPEORMUSERNAME}" >> /etc/environment
+          echo "TYPEORM_PASSWORD=${TYPEORMPASSWORD}" >> /etc/environment

@@ -131,14 +131,14 @@ jobs:
               --stack-name "udapeopleBackend-${CIRCLE_WORKFLOW_ID:0:8}" \
               --parameter-overrides \
                   ID="${CIRCLE_WORKFLOW_ID:0:8}" \
-                  TYPEORM_CONNECTION="${TYPEORM_CONNECTION}" \
-                  TYPEORM_ENTITIES="${TYPEORM_ENTITIES}" \
-                  TYPEORM_MIGRATIONS="${TYPEORM_MIGRATIONS}" \
-                  TYPEORM_MIGRATIONS_DIR="${TYPEORM_MIGRATIONS_DIR}" \
-                  TYPEORM_HOST="${TYPEORM_HOST}" \
-                  TYPEORM_PORT="${TYPEORM_PORT}" \
-                  TYPEORM_USERNAME="{TYPEORM_USERNAME}" \
-                  TYPEORM_PASSWORD="${TYPEORM_PASSWORD}"
+                  TYPEORMCONNECTION="${TYPEORM_CONNECTION}" \
+                  TYPEORMENTITIES="${TYPEORM_ENTITIES}" \
+                  TYPEORMMIGRATIONS="${TYPEORM_MIGRATIONS}" \
+                  TYPEORMMIGRATIONSDIR="${TYPEORM_MIGRATIONS_DIR}" \
+                  TYPEORMHOST="${TYPEORM_HOST}" \
+                  TYPEORMPORT="${TYPEORM_PORT}" \
+                  TYPEORMUSERNAME="{TYPEORM_USERNAME}" \
+                  TYPEORMPASSWORD="${TYPEORM_PASSWORD}"
 
             BACKEND_IP=$(aws ec2 describe-instances \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
