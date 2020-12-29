@@ -268,6 +268,7 @@ jobs:
             BACKEND_IP=$(curl -H "token: ${CIRCLE_WORKFLOW_ID}" --request GET https://api.memstash.io/values/backendip)
             export API_URL="http://${BACKEND_IP}:3030"
             echo "${API_URL}"
+            cd frontend
             npm run build
       - run:
           name: Deploy frontend objects
