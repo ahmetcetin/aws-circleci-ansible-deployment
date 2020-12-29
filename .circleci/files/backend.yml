@@ -59,15 +59,3 @@ Resources:
       Tags:
         - Key: Name
           Value: !Sub udapeopleBackend-${ID}
-      UserData:
-        Fn::Base64: |
-          #!/bin/bash
-          echo "TYPEORM_CONNECTION=${TYPEORMCONNECTION}" >> /etc/environment
-          echo "TYPEORM_DATABASE=${TYPEORMDATABASE}" >> /etc/environment
-          echo "TYPEORM_MIGRATIONS=${TYPEORMMIGRATIONS}" >> /etc/environment
-          echo "TYPEORM_MIGRATIONS_DIR=${TYPEORMMIGRATIONSDIR}" >> /etc/environment
-          echo "TYPEORM_ENTITIES=${TYPEORMENTITIES}" >> /etc/environment
-          echo "TYPEORM_HOST=${TYPEORMHOST}" >> /etc/environment
-          echo "TYPEORM_PORT=${TYPEORMPORT}" >> /etc/environment
-          echo "TYPEORM_USERNAME=${TYPEORMUSERNAME}" >> /etc/environment
-          echo "TYPEORM_PASSWORD=${TYPEORMPASSWORD}" >> /etc/environment
