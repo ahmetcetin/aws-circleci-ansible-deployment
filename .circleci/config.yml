@@ -133,6 +133,7 @@ jobs:
                   ID="${CIRCLE_WORKFLOW_ID:0:8}" \
                   AHMET="AHMET" \
                   TYPEORMCONNECTION=${TYPEORM_CONNECTION} \
+                  TYPEORMDATABASE=${TYPEORM_DATABASE} \
                   TYPEORMENTITIES=${TYPEORM_ENTITIES} \
                   TYPEORMMIGRATIONS=${TYPEORM_MIGRATIONS} \
                   TYPEORMMIGRATIONSDIR=${TYPEORM_MIGRATIONS_DIR} \
