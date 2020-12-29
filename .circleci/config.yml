@@ -275,7 +275,8 @@ jobs:
             aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:8}/ --recursive
       - destroy-environment:
           WorkflowID: ${CIRCLE_WORKFLOW_ID:0:7}
-      - revert-migrations
+      - revert-migrations:
+          WorkflowID: "${CIRCLE_WORKFLOW_ID}"
 
   # deploy-backend:
   #   docker:
