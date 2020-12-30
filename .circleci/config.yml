@@ -357,7 +357,7 @@ jobs:
             aws cloudformation deploy \
               --stack-name production-distro \
               --template-file .circleci/files/cloudfront.yml \
-              --region EU-WEST-1 \
+              --region ${AWS_DEFAULT_REGION} \
               --parameter-overrides WorkflowID="${CIRCLE_WORKFLOW_ID:0:8}"
             echo "Update complete"
 
