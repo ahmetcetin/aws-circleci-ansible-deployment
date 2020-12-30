@@ -22,4 +22,4 @@
     rm -rf dist
     npm run build
     pm2 ls
-    pm2 start npm --name backend -- run "start:prod"
+    NODE_ENV=production pm2 start dist/main.js
