@@ -296,8 +296,12 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            apk add --update --allow-untrusted tar gzip ansible nodejs npm curl
+            apk add --update --allow-untrusted tar gzip ansible nodejs npm curl zip
             pip install awscli
+      -run:
+          name: Zip source code
+          command: |
+            zip -r backend.zip backend
       - run:
           name: Deploy backend
           command: |

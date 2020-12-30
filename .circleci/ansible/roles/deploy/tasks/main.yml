@@ -1,9 +1,14 @@
 ---
 
-- name: Copy files to ec2
-  copy:
-    src: /root/project/backend
+- name: Copy & uncompress files
+  unarchive:
+    src: /root/project/backend.zip
     dest: /home/ubuntu
+
+# - name: Copy files to ec2
+#   copy:
+#     src: /root/project/backend
+#     dest: /home/ubuntu
 
 - name: Install npm packages
   shell: |
