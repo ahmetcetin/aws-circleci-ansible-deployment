@@ -298,7 +298,7 @@ jobs:
           command: |
             apk add --update --allow-untrusted tar gzip ansible nodejs npm curl zip
             pip install awscli
-      -run:
+      - run:
           name: Zip source code
           command: |
             zip -r backend.zip backend
