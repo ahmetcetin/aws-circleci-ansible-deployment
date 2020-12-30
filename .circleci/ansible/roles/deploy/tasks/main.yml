@@ -19,7 +19,4 @@
   become: true
   shell: |
     cd /home/ubuntu/backend
-    rm -rf dist
-    npm run build
-    pm2 ls
-    NODE_ENV=production pm2 start dist/main.js
+    pm2 start npm -- run start
