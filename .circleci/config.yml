@@ -338,42 +338,44 @@ jobs:
           command: |
             BACKEND_IP=$(curl -H "token: ${CIRCLE_WORKFLOW_ID}" --request GET https://api.memstash.io/values/backendip)
             curl "http://${BACKEND_IP}:3030/api/status"
-      # Here's where you will add some code to rollback on failure
 
-  # cloudfront-update:
-  #   docker:
-  #     # Docker image here that supports AWS CLI
-  #   steps:
-  #     # Checkout code from git
-  #     - run:
-  #         name: Install dependencies
-  #         command: |
-  #           # your code here
-  #     - run:
-  #         name: Update cloudfront distribution
-  #         command: |
-  #           # your code here
-  #     # Here's where you will add some code to rollback on failure
+      - destroy-environment:
+          WorkflowID: ${CIRCLE_WORKFLOW_ID:0:8}
+      - revert-migrations:
+          WorkflowID: "${CIRCLE_WORKFLOW_ID}"
 
-  # cleanup:
-  #   docker:
-  #     # Docker image here
-  #   steps:
-  #     # Checkout code from git
-  #     - run:
-  #         name: Get old stack workflow id
-  #         command: |
-  #           # your code here
-  #           export OldWorkflowID="the id here"
-  #           export STACKS=[] #put the list of stacks here
-  #     - run:
-  #         name: Remove old stacks and files
-  #         command: |
-  #           if [[ "${STACKS[@]}" =~ "${OldWorkflowID}" ]]
-  #           then
-  #             # your code here
-  #           fi
+  cloudfront-update:
+    docker:
+      - image: amazon/aws-cli
+    steps:
+      - checkout
+      - run:
+          name: Update cloudfront distribution
+          command: |
+            PREV_WORKFLOW_ID=$(aws cloudformation list-exports --query "Exports[?Name=='WorkflowID'].Value" --output text)
+            echo "Updating CloudFront"
+            aws cloudformation deploy \
+              --stack-name production-distro \
+              --template-file .circleci/files/cloudfront.yml \
+              --region EU-WEST-1 \
+              --parameter-overrides WorkflowID="${CIRCLE_WORKFLOW_ID:0:8}"
+            echo "Update complete"
 
+            ALLSTACKS=$(aws cloudformation list-stacks --query "StackSummaries[*].StackName" --stack-status-filter UPDATE_COMPLETE CREATE_COMPLETE --output text)
+
+            if [ -n "${PREV_WORKFLOW_ID:0:8}" ] && [[ "${STACKS[@]}" =~ "${PREV_WORKFLOW_ID:0:8}" ]]
+            then
+              echo "deleting previous stack (${PREV_WORKFLOW_ID:0:8})"
+              aws s3 rm s3://udapeople-${PREV_WORKFLOW_ID:0:8}/ --recursive
+              aws cloudformation delete-stack --stack-name udapeople-frontend-${OLD_CIRCLE_WORKFLOW_ID:0:8}
+              aws cloudformation delete-stack --stack-name udapeople-backend-${OLD_CIRCLE_WORKFLOW_ID:0:8}
+              echo "previous stack removed"
+            fi
+
+      - destroy-environment:
+          WorkflowID: ${CIRCLE_WORKFLOW_ID:0:8}
+      - revert-migrations:
+          WorkflowID: "${CIRCLE_WORKFLOW_ID}"
 
 workflows:
   default:
