@@ -15,10 +15,11 @@
     cd /home/ubuntu/backend
     npm install
 
-- name: Prestart
+- name: Build
   shell: |
     cd /home/ubuntu/backend
-    npm run prestart:prod
+    rm -rf dist
+    npm run build
 
 - name: Run server
   become: true
