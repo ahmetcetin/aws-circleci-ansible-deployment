@@ -1,4 +1,4 @@
-import moment from 'moment-timezone/builds/moment-timezone-with-data';
+import * as moment from 'moment-timezone';
 import { BaseCommandHandler } from '../../../../common/commands';
 import { UpdateEmployeeName } from '../update-employee-name.command';
 import { CommandHandler } from '@nestjs/cqrs';
