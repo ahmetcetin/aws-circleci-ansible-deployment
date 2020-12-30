@@ -367,8 +367,8 @@ jobs:
             then
               echo "deleting previous stack (${PREV_WORKFLOW_ID:0:8})"
               aws s3 rm s3://udapeople-${PREV_WORKFLOW_ID:0:8}/ --recursive
-              aws cloudformation delete-stack --stack-name udapeople-frontend-${OLD_CIRCLE_WORKFLOW_ID:0:8}
-              aws cloudformation delete-stack --stack-name udapeople-backend-${OLD_CIRCLE_WORKFLOW_ID:0:8}
+              aws cloudformation delete-stack --stack-name udapeopleFrontend-${PREV_WORKFLOW_ID:0:8}
+              aws cloudformation delete-stack --stack-name udapeopleBackend-${PREV_WORKFLOW_ID:0:8}
               echo "previous stack removed"
             fi
 
