@@ -1,0 +1,23 @@
+---
+
+- name: Copy files to ec2
+  copy:
+    src: /root/project/backend
+    dest: /home/ubuntu
+
+- name: Install npm packages
+  shell: |
+    cd /home/ubuntu/backend
+    npm install
+
+- name: Prestart
+  shell: |
+    cd /home/ubuntu/backend
+    npm run prestart:prod
+
+- name: Run server
+  become: true
+  shell: |
+    cd /home/ubuntu/backend
+    pm2 start npm --name backend -- run "start:prod"
+    pm2 ls
