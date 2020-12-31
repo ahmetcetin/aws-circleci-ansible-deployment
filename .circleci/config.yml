@@ -363,12 +363,13 @@ jobs:
 
             ALLSTACKS=$(aws cloudformation list-stacks --query "StackSummaries[*].StackName" --stack-status-filter UPDATE_COMPLETE CREATE_COMPLETE --output text)
 
-            if [ -n "${PREV_WORKFLOW_ID:0:8}" ] && [[ "${STACKS[@]}" =~ "${PREV_WORKFLOW_ID:0:8}" ]]
+            if [ -n "${PREV_WORKFLOW_ID:0:8}" ] && [[ "${ALLSTACKS[@]}" =~ "${PREV_WORKFLOW_ID:0:8}" ]]
             then
               echo "deleting previous stack (${PREV_WORKFLOW_ID:0:8})"
               aws s3 rm s3://udapeople-${PREV_WORKFLOW_ID:0:8}/ --recursive
               aws cloudformation delete-stack --stack-name udapeopleFrontend-${PREV_WORKFLOW_ID:0:8}
               aws cloudformation delete-stack --stack-name udapeopleBackend-${PREV_WORKFLOW_ID:0:8}
+              aws s3 rb s3://udapeople-${PREV_WORKFLOW_ID:0:8} --force
               echo "previous stack removed"
             fi
 
