@@ -15,8 +15,15 @@
     cd /home/ubuntu/backend
     npm install
 
+- name: Daemonize pm2
+  shell: |
+    cd /home/ubuntu/backend
+    $(pm2 startup)
+
 - name: Build & run
   become: true
   shell: |
     cd /home/ubuntu/backend
     pm2 start npm -- run start
+    pm2 save
+
