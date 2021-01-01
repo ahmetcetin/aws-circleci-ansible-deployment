@@ -18,6 +18,7 @@
 - name: Daemonize pm2
   shell: |
     cd /home/ubuntu/backend
+    pm2 startup
     $(pm2 startup)
 
 - name: Build & run
