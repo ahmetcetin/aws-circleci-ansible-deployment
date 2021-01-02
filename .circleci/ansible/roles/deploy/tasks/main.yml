@@ -16,10 +16,10 @@
     npm install
 
 - name: Daemonize pm2
-  shell: |
-    cd /home/ubuntu/backend
-    pm2 startup
-    $(pm2 startup)
+  become: true
+  command: pm2 startup systemd -u username --hp /home/username
+  environment:
+    PATH: "{{ ansible_env.PATH }}"
 
 - name: Build & run
   become: true
