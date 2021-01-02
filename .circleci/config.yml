@@ -369,7 +369,7 @@ jobs:
             echo $DIST_ID
             NEW_DIST_ID=$DISTID | tr -d '"'
             echo $NEW_DIST_ID
-            aws cloudfront create-invalidation --distribution-id $NEW_DIST_ID --paths "/*" --output text
+            aws cloudfront create-invalidation --distribution-id $DIST_ID --paths "/*" --output text
             echo "Update complete"
 
             ALLSTACKS=$(aws cloudformation list-stacks --query "StackSummaries[*].StackName" --stack-status-filter UPDATE_COMPLETE CREATE_COMPLETE --output text)
