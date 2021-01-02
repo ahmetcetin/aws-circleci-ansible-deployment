@@ -352,7 +352,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            sudo yum install jq -y
+            yum install jq -y
       - run:
           name: Update cloudfront distribution
           command: |
