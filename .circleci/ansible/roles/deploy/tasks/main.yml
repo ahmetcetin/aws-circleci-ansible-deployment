@@ -17,9 +17,8 @@
 
 - name: Daemonize pm2
   become: true
-  command: pm2 startup systemd -u username --hp /home/username
-  environment:
-    PATH: "{{ ansible_env.PATH }}"
+  shell: |
+    sudo env PATH=$PATH:/usr/bin /usr/local/lib/node_modules/pm2/bin/pm2 startup systemd -u ubuntu --hp /home/ubuntu
 
 - name: Build & run
   become: true

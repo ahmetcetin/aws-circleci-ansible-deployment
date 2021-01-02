@@ -366,10 +366,8 @@ jobs:
 
             echo "Invalidate cache"
             DIST_ID=$(aws cloudfront list-distributions --query "DistributionList.Items[].{id: Id,OriginDomainName: Origins.Items[0].DomainName}[?contains(OriginDomainName, 'udapeople')] | [0]" | jq .id)
-            echo $DIST_ID
-            NEW_DIST_ID=$(echo $DIST_ID | tr -d '"')
-            echo $NEW_DIST_ID
-            aws cloudfront create-invalidation --distribution-id $NEW_DIST_ID --paths "/*" --output text
+            CLEAN_DIST_ID=$(echo $DIST_ID | tr -d '"')
+            aws cloudfront create-invalidation --distribution-id $CLEAN_DIST_ID --paths "/*" --output text
             echo "Update complete"
 
             ALLSTACKS=$(aws cloudformation list-stacks --query "StackSummaries[*].StackName" --stack-status-filter UPDATE_COMPLETE CREATE_COMPLETE --output text)
