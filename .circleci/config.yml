@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  aws-cli: circleci/aws-cli@1.3.1
+
 commands:
   destroy-environment:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
@@ -346,13 +349,10 @@ jobs:
 
   cloudfront-update:
     docker:
-      - image: amazon/aws-cli
+      - image: cimg/base:2021.01
     steps:
       - checkout
-      - run:
-          name: Install dependencies
-          command: |
-            yum install jq -y
+      - aws-cli/setup
       - run:
           name: Update cloudfront distribution
           command: |
@@ -369,7 +369,7 @@ jobs:
             echo $DIST_ID
             NEW_DIST_ID=$DISTID | tr -d '"'
             echo $NEW_DIST_ID
-            aws cloudfront create-invalidation --distribution-id $DIST_ID --paths "/*" --output text
+            aws cloudfront create-invalidation --distribution-id $NEW_DIST_ID --paths "/*" --output text
             echo "Update complete"
 
             ALLSTACKS=$(aws cloudformation list-stacks --query "StackSummaries[*].StackName" --stack-status-filter UPDATE_COMPLETE CREATE_COMPLETE --output text)
