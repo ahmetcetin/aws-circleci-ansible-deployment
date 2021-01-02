@@ -4,13 +4,14 @@ A bare minimum react-redux-webpack-typescript boilerplate with TodoMVC example.
 
 [Live demo](https://rokoroku.github.io/react-redux-typescript-boilerplate)
 
-Note that this project does not include **Server-Side Rendering**, **Static code analysis**, **Testing Frameworks** and other stuffs that makes the package unnecessarily complicated. (e.g. yarn, tslint, jest, ...)  
+Note that this project does not include **Server-Side Rendering**, **Static code analysis**, **Testing Frameworks** and other stuffs that makes the package unnecessarily complicated. (e.g. yarn, tslint, jest, ...)
 If needed, please fork this repository and add your own that meets your requirements.
 
 Ideal for creating React apps from the scratch.
 
 See also: [react-mobx-typescript-boilerplate](https://github.com/rokoroku/react-mobx-typescript-boilerplate)
 
+test
 ## Contains
 
 - [x] [Typescript](https://www.typescriptlang.org/) 3
