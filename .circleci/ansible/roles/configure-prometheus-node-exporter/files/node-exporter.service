@@ -3,7 +3,8 @@ Description=Prometheus Node Exporter Service
 After=network.target
 
 [Service]
-User=root
+User=node_exporter
+Group=node_exporter
 Type=simple
 ExecStart=/usr/local/bin/node_exporter
 
