@@ -1,10 +1,19 @@
-- name: "install node exporter."
+- name: Create a login user
+  user:
+    name: node_exporter
+    password: '$6$prCnnOXpg2RaX7mR$zFxUEr7Z0mVM/VF9TqH48gM7dOPufb7MRLeGeE0.VzM5fbPQ1KJ3bib3RWmr.6H/4L05xQLGIuS6Of5B3bvVc1'
+    state: present
+    shell: /bin/bash
+    system: no
+    createhome: no
+
+- name: Install node exporter
   unarchive:
     src: https://github.com/prometheus/node_exporter/releases/download/v1.0.1/node_exporter-1.0.1.linux-amd64.tar.gz
     dest: /tmp
     remote_src: yes
 
-- name: "move binary to /usr/local/bin."
+- name: Move binary
   become: true
   copy:
     src: /tmp/node_exporter-1.0.1.linux-amd64/node_exporter
@@ -12,16 +21,20 @@
     remote_src: yes
     mode: '0777'
 
-- name: "add node exporter configuration."
+- name: Add node exporter configuration
   become: true
   copy:
-    src: node_exporter.service
+    src: node-exporter.service
     dest: /etc/systemd/system/
 
-- name: "enable node_exporter service"
+- name: Enable service
   become: true
-  systemd:
-    state: restarted
-    daemon_reload: yes
-    name: node_exporter
+  service:
+    name: node-exporter
     enabled: yes
+    daemon_reload: yes
+
+- name: Start service
+  service:
+    name: node-exporter
+    state: started
