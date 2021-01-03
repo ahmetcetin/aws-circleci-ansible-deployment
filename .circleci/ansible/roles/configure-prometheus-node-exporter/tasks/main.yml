@@ -1,12 +1,12 @@
-- name: Create a login user
-  become: true
-  user:
-    name: node_exporter
-    password: '$6$prCnnOXpg2RaX7mR$zFxUEr7Z0mVM/VF9TqH48gM7dOPufb7MRLeGeE0.VzM5fbPQ1KJ3bib3RWmr.6H/4L05xQLGIuS6Of5B3bvVc1'
-    state: present
-    shell: /bin/bash
-    system: no
-    createhome: no
+# - name: Create a login user
+#   become: true
+#   user:
+#     name: node_exporter
+#     password: '$6$prCnnOXpg2RaX7mR$zFxUEr7Z0mVM/VF9TqH48gM7dOPufb7MRLeGeE0.VzM5fbPQ1KJ3bib3RWmr.6H/4L05xQLGIuS6Of5B3bvVc1'
+#     state: present
+#     shell: /bin/bash
+#     system: no
+#     createhome: no
 
 - name: Install node exporter
   unarchive:
