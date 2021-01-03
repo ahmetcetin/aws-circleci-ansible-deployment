@@ -1,0 +1,5 @@
+Public Url to GitHub repository [URL01]: https://github.com/udacity-tuts/cloud-devops-project-3
+Public URL for your S3 Bucket [URL02]: http://udapeople-9b61a3e1.s3-website-eu-west-1.amazonaws.com/
+Public URL for your CloudFront distribution [URL03]: http://da9yde9j03my4.cloudfront.net/
+Public URLs to deployed application back-end in EC2 [URL04]: http://ec2-34-244-173-177.eu-west-1.compute.amazonaws.com:3030
+Public URL to your Prometheus Server [URL05]: http://ec2-54-154-40-196.eu-west-1.compute.amazonaws.com:9090/targets
