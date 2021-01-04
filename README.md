@@ -1,4 +1,4 @@
-## Give your Application Auto-Deploy Superpowers
+## AWS/CircleCI/Ansible CI/CS Example
 
 In this project, you will prove your mastery of the following learning objectives:
 
