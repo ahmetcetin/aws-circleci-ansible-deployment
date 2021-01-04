@@ -1,4 +1,4 @@
-## AWS/CircleCI/Ansible CI/CS Example
+## AWS/CircleCI/Ansible CI/CD Example
 
 In this project, you will prove your mastery of the following learning objectives:
 
